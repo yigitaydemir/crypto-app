@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 function Home() {
   const [coins, setCoins] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [coinsPerPage, setCoinsPerPage] = useState(10)
+  const [coinsPerPage] = useState(10)
 
   useEffect(() => {
     const options = {
@@ -48,6 +48,7 @@ function Home() {
             ))
           }
           <Pagination coinsPerPage={coinsPerPage} totalCoins={coins.data.coins.length} paginate={paginate}></Pagination>
+        
         </div>
     </div>
   )
