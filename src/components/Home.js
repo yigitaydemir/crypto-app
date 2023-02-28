@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import CryptoCards from './CryptoCards';
+import Pagination from './Pagination';
 
 function Home() {
   const [coins, setCoins] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [coinsPerPage, setCoinsPerPage] = useState(10)
 
   useEffect(() => {
     const options = {
@@ -15,10 +18,16 @@ function Home() {
       .then((response) => response.json())
       .then((result) => setCoins(result));
 
-      console.log(coins)
+      // console.log(coins)
     }, [])
-  
 
+    // Get Current Coins
+    const indexOfLastCoin = currentPage * coinsPerPage
+    const indexOfFirstCoin = indexOfLastCoin - coinsPerPage
+    const currentCoins = coins.data.coins.slice(indexOfFirstCoin, indexOfLastCoin)
+
+    // Change Page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (
     <div className='backdrop-blur-[20px] bg-[#00000033] text-white w-11/12 max-w-6xl relative flex items-center justify-center min-height flex-col my-2 rounded-md'>
@@ -34,10 +43,11 @@ function Home() {
         
         <div className='relative flex flex-col justify-center items-center w-11/12'>
           {
-            coins.data.coins.map((coin) => (
+            currentCoins.map((coin) => (
               <CryptoCards key={coin.uuid} rank={coin.rank} name={coin.name} symbol={coin.symbol} icon={coin.iconUrl} change={coin.change} price={coin.price} cap={coin.marketCap}></CryptoCards>
             ))
           }
+          <Pagination coinsPerPage={coinsPerPage} totalCoins={coins.data.coins.length} paginate={paginate}></Pagination>
         </div>
     </div>
   )

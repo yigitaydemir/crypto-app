@@ -8,7 +8,7 @@ const CryptoCards = ({ rank, icon, name, symbol, price, change, cap }) => {
       <p className="flex-1">{rank}</p>
       <div className="flex-1">
         <Link to="#" className="flex">
-          <img src={icon} className="w-7"></img>
+          <img src={icon} className="w-7" alt="Coin Icon"></img>
           <h1 className="m-0.5 p-0.5">{name}</h1>
         </Link>
       </div>
