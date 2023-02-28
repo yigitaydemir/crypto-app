@@ -1,13 +1,18 @@
-import Navbar from './components/Navbar';
-import Main from './components/Main';
-
-import './App.css';
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Watchlist from "./components/Watchlist";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
-      <Main></Main>
+
+      <Routes>
+        <Route path="/" exact element={<Home></Home>}></Route>
+        <Route path="/watchlist" element={<Watchlist></Watchlist>}></Route>
+      </Routes>
     </div>
   );
 }
